@@ -35,10 +35,10 @@
 
 <ul>
 <li>Don't read state from a store, that sounds like we're mixing business logic in actions.</li>
-<li>Don't respond to the payload from components, that's also business logic.<br>
-</li>
+<li>Don't respond to the payload from components, that's also business logic.</li>
 </ul>
 </li>
+<li>Do not listen to stores (although stores can trigger actions)</li>
 </ul>
 
 <h2>
@@ -47,7 +47,7 @@
 <ul>
 <li>Where the business domain model belongs</li>
 <li>Can have direct method calls from other business modelling (other stores)</li>
-<li>Contain <a href="#state">state</a> that matters for business domain modelling
+<li>Can contain <a href="#state">state</a> that matters for business domain modelling
 
 <ul>
 <li>Don't put everything in here. Just the stuff you need to persist for business decisions. </li>
@@ -62,6 +62,9 @@
 </li>
 <li>
 <a href="#shared-modelling">Shared modelling</a> should be composed into mixins</li>
+<li>Emit events so that views and other stores can react to changes.</li>
+<li>Emit action events so that other dataflows can be triggered. <a href="#stores-triggering-actions">I have some concerns</a>
+</li>
 </ul>
 
 <h2>
@@ -142,6 +145,22 @@
 </blockquote>
 
 <p>I'm of the opinion that you would try to avoid storing a whole map component (google map object), and have a controller view share it's state with the business model through busines-centric actions. This way you find yourself modelling your domain, not Googles. </p>
+
+<h2>
+<a id="stores-triggering-actions" class="anchor" href="#stores-triggering-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stores triggering actions</h2>
+
+<p>This one seems like it could become hard to reason about.</p>
+
+<p>My concern is that this would introduce an action that:</p>
+
+<ul>
+<li>is triggered without new information being introduced into the business modelling</li>
+<li>is possibly only a 'sub-flow' of the public API, making it something that views would never directly consume, ergo, not a Public API</li>
+</ul>
+
+<p>I want to use these, they seem valuable.</p>
+
+<p><a href="https://github.com/spoike/refluxjs/issues/158#issuecomment-67444098">There is a discussion here</a></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/bunniesandbeatings/RefluxManifesto">Refluxmanifesto</a> is maintained by <a href="https://github.com/bunniesandbeatings">bunniesandbeatings</a>.</span>
