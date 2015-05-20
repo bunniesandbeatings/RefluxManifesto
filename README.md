@@ -5,13 +5,13 @@ Thoughts on using Reflux as I try to come to terms with it.
   * [New Data](#new-data) **always** enters through actions
   * Actions represent one half of the [Public API](#public-api) of your business domain.
   * Actions do no modelling, Stores do.
-
+    * Don't read state from a store, that sounds like we're mixing business logic in actions.
+    * Don't respond to the payload from components, that's also business logic.  
 ## Stores:
   * Where the business domain model belongs
   * Can have direct method calls from other business modelling (other stores)
   * Contain [state](#state) that matters for business domain modelling
     * Don't put everything in here. Just the stuff you need to persist for business decisions. 
-  * Actions could read state from a store, BUT that sounds like we're mixing business logic in actions
   * Stores can be dependent on [multiple events occuring](https://github.com/spoike/refluxjs#joining-parallel-listeners-with-composed-listenables)
     * from actions
     * from other stores
