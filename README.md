@@ -7,6 +7,7 @@ Thoughts on using Reflux as I try to come to terms with it.
   * Actions do no modelling, Stores do.
     * Don't read state from a store, that sounds like we're mixing business logic in actions.
     * Don't respond to the payload from components, that's also business logic.  
+
 ## Stores:
   * Where the business domain model belongs
   * Can have direct method calls from other business modelling (other stores)
@@ -27,9 +28,9 @@ Thoughts on using Reflux as I try to come to terms with it.
      * Know nothing of your Actions or stores
      * Are mutated via parent 'ViewControllers' setting proprties or state.
 
-## Notes
+# Notes
 
-### New Data
+## New Data
 
 New data can:
   * Result from user actions
@@ -38,7 +39,7 @@ New data can:
 
 Even without new data, if the view wants state to change (eg SomeThing.toggleSelected), do so through actions.
 
-### Public API
+## Public API
 
 Your business domain get's a clear public API comprised of:
   * Actions: which are the only cause for state mutation.
@@ -47,7 +48,7 @@ Your business domain get's a clear public API comprised of:
  
 I'm not sure about reading state from the stores. It might be possible to avoid using it in views, and keep the interface very narrow indeed.
 
-### Shared Modelling
+## Shared Modelling
 From [An Issue](https://github.com/spoike/refluxjs/issues/252) where Spoike discusses typical store->component updates and shared behaviour.
 
 > `trigger` passes the arguments over to the listeners... and I personally prefer to pass all the data that the components need through the event. I have passed the store itself (for quick prototype hacks) and use setters and getters. Both approaches are equal valid implementations and I don't want to enforce one over the other.
@@ -56,7 +57,7 @@ From [An Issue](https://github.com/spoike/refluxjs/issues/252) where Spoike disc
 
 > As to how to reuse, I use mixins when applicable. If you think about them as traits, it makes it easy to attach functionality that you may want to reuse. If you need to add common methods to all stores you may add them to the `Reflux.StoreMixin` which is used during creation of stores.
 
-### State
+## State
 
 Spoike suggests:
 > > As far as Flux goes is it okay to store the global var map = Object instance inside a store as a plain JS variable and then have a getter/setter action to get that map instance across multiple components in my app, including Maps component itself?
