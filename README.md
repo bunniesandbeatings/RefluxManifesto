@@ -6,17 +6,20 @@ Thoughts on using Reflux as I try to come to terms with it.
   * Actions represent one half of the [Public API](#public-api) of your business domain.
   * Actions do no modelling, Stores do.
     * Don't read state from a store, that sounds like we're mixing business logic in actions.
-    * Don't respond to the payload from components, that's also business logic.  
+    * Don't respond to the payload from components, that's also business logic.
+  * Do not listen to stores (although stores can trigger actions)
 
 ## Stores:
   * Where the business domain model belongs
   * Can have direct method calls from other business modelling (other stores)
-  * Contain [state](#state) that matters for business domain modelling
+  * Can contain [state](#state) that matters for business domain modelling
     * Don't put everything in here. Just the stuff you need to persist for business decisions. 
   * Stores can be dependent on [multiple events occuring](https://github.com/spoike/refluxjs#joining-parallel-listeners-with-composed-listenables)
     * from actions
     * from other stores
   * [Shared modelling](#shared-modelling) should be composed into mixins
+  * Emit events so that views and other stores can react to changes.
+  * Emit action events so that other dataflows can be triggered. (this one seems like it could become hard to reason about?) [see discussion](https://github.com/spoike/refluxjs/issues/158#issuecomment-67444098)
 
 ## Components:
    * Are dumb or smart
