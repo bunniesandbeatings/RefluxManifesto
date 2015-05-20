@@ -13,7 +13,7 @@ Thoughts on using Reflux as I try to come to terms with it.
   * Stores can be dependent on [multiple events occuring](https://github.com/spoike/refluxjs#joining-parallel-listeners-with-composed-listenables)
     * from actions
     * from other stores
-  * Shared modelling should be composed into helpers (other modeling functions in a seperate namespace)
+  * [Shared modelling](#shared-modelling) should be composed into mixins
 
 ## Components:
    * Are dumb or smart
@@ -45,3 +45,12 @@ Your business domain get's a clear public API comprised of:
   * Store State: Which allows views to refresh based on state regardless of wether store events occured
  
 I'm not sure about reading state from the stores. It might be possible to avoid using it in views, and keep the interface very narrow indeed.
+
+### Shared Modelling
+  From [An Issue](https://github.com/spoike/refluxjs/issues/252) where Spoike discusses typical store->component updates and shared behaviour.
+
+> `trigger` passes the arguments over to the listeners... and I personally prefer to pass all the data that the components need through the event. I have passed the store itself (for quick prototype hacks) and use setters and getters. Both approaches are equal valid implementations and I don't want to enforce one over the other.
+
+> However I don't personally encourage the latter approach (of setters and getters on the store) since that usually has been a slipper slope to create stores that are "god classes". "God class" or "big ball of mud" are anti-patterns that I like to avoid.
+
+> As to how to reuse, I use mixins when applicable. If you think about them as traits, it makes it easy to attach functionality that you may want to reuse. If you need to add common methods to all stores you may add them to the `Reflux.StoreMixin` which is used during creation of stores.
