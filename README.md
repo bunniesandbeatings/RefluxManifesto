@@ -19,7 +19,7 @@ Thoughts on using Reflux as I try to come to terms with it.
     * from other stores
   * [Shared modelling](#shared-modelling) should be composed into mixins
   * Emit events so that views and other stores can react to changes.
-  * Emit action events so that other dataflows can be triggered. (this one seems like it could become hard to reason about?) [see discussion](https://github.com/spoike/refluxjs/issues/158#issuecomment-67444098)
+  * Emit action events so that other dataflows can be triggered. [I have some concerns](#stores-triggering-actions)
 
 ## Components:
    * Are dumb or smart
@@ -68,3 +68,14 @@ Spoike suggests:
 > Sure, if that works for you then it is okay. Stores are supposed to hold all the data that the components need between each other.
 
 I'm of the opinion that you would try to avoid storing a whole map component (google map object), and have a controller view share it's state with the business model through busines-centric actions. This way you find yourself modelling your domain, not Googles. 
+
+## Stores triggering actions
+This one seems like it could become hard to reason about.
+
+My concern is that this would introduce an action that:
+  * is triggered without new information being introduced into the business modelling
+  * is possibly only a 'sub-flow' of the public API, making it something that views would never directly consume, ergo, not a Public API
+
+I want to use these, they seem valuable.
+
+[There is a discussion here](https://github.com/spoike/refluxjs/issues/158#issuecomment-67444098)
