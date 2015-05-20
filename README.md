@@ -61,6 +61,7 @@ From [An Issue](https://github.com/spoike/refluxjs/issues/252) where Spoike disc
 
 Spoike suggests:
 > > As far as Flux goes is it okay to store the global var map = Object instance inside a store as a plain JS variable and then have a getter/setter action to get that map instance across multiple components in my app, including Maps component itself?
+
 > Sure, if that works for you then it is okay. Stores are supposed to hold all the data that the components need between each other.
 
 I'm of the opinion that you would try to avoid storing a whole map component (google map object), and have a controller view share it's state with the business model through busines-centric actions. This way you find yourself modelling your domain, not Googles. 
