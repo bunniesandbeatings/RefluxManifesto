@@ -40,7 +40,14 @@
 <li>
 <a href="#new-data">New Data</a> <strong>always</strong> enters through actions</li>
 <li>Actions represent one half of the <a href="#public-api">Public API</a> of your business domain.</li>
-<li>Actions do no modelling, Stores do.</li>
+<li>Actions do no modelling, Stores do.
+
+<ul>
+<li>Don't read state from a store, that sounds like we're mixing business logic in actions.</li>
+<li>Don't respond to the payload from components, that's also business logic.<br>
+</li>
+</ul>
+</li>
 </ul>
 
 <h2>
@@ -49,7 +56,12 @@
 <ul>
 <li>Where the business domain model belongs</li>
 <li>Can have direct method calls from other business modelling (other stores)</li>
-<li>Actions could read state from a store, BUT that sounds like we're mixing business logic in actions</li>
+<li>Contain <a href="#state">state</a> that matters for business domain modelling
+
+<ul>
+<li>Don't put everything in here. Just the stuff you need to persist for business decisions. </li>
+</ul>
+</li>
 <li>Stores can be dependent on <a href="https://github.com/spoike/refluxjs#joining-parallel-listeners-with-composed-listenables">multiple events occuring</a>
 
 <ul>
@@ -57,7 +69,8 @@
 <li>from other stores</li>
 </ul>
 </li>
-<li>Shared modelling should be composed into helpers (other modeling functions in a seperate namespace)</li>
+<li>
+<a href="#shared-modelling">Shared modelling</a> should be composed into mixins</li>
 </ul>
 
 <h2>
@@ -82,11 +95,11 @@
 </li>
 </ul>
 
-<h2>
-<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
+<h1>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h1>
 
-<h3>
-<a id="new-data" class="anchor" href="#new-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Data</h3>
+<h2>
+<a id="new-data" class="anchor" href="#new-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Data</h2>
 
 <p>New data can:</p>
 
@@ -98,8 +111,8 @@
 
 <p>Even without new data, if the view wants state to change (eg SomeThing.toggleSelected), do so through actions.</p>
 
-<h3>
-<a id="public-api" class="anchor" href="#public-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public API</h3>
+<h2>
+<a id="public-api" class="anchor" href="#public-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public API</h2>
 
 <p>Your business domain get's a clear public API comprised of:</p>
 
@@ -110,6 +123,33 @@
 </ul>
 
 <p>I'm not sure about reading state from the stores. It might be possible to avoid using it in views, and keep the interface very narrow indeed.</p>
+
+<h2>
+<a id="shared-modelling" class="anchor" href="#shared-modelling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Shared Modelling</h2>
+
+<p>From <a href="https://github.com/spoike/refluxjs/issues/252">An Issue</a> where Spoike discusses typical store-&gt;component updates and shared behaviour.</p>
+
+<blockquote>
+<p><code>trigger</code> passes the arguments over to the listeners... and I personally prefer to pass all the data that the components need through the event. I have passed the store itself (for quick prototype hacks) and use setters and getters. Both approaches are equal valid implementations and I don't want to enforce one over the other.</p>
+
+<p>However I don't personally encourage the latter approach (of setters and getters on the store) since that usually has been a slipper slope to create stores that are "god classes". "God class" or "big ball of mud" are anti-patterns that I like to avoid.</p>
+
+<p>As to how to reuse, I use mixins when applicable. If you think about them as traits, it makes it easy to attach functionality that you may want to reuse. If you need to add common methods to all stores you may add them to the <code>Reflux.StoreMixin</code> which is used during creation of stores.</p>
+</blockquote>
+
+<h2>
+<a id="state" class="anchor" href="#state" aria-hidden="true"><span class="octicon octicon-link"></span></a>State</h2>
+
+<p>Spoike suggests:</p>
+
+<blockquote>
+<blockquote>
+<p>As far as Flux goes is it okay to store the global var map = Object instance inside a store as a plain JS variable and then have a getter/setter action to get that map instance across multiple components in my app, including Maps component itself?
+Sure, if that works for you then it is okay. Stores are supposed to hold all the data that the components need between each other.</p>
+</blockquote>
+</blockquote>
+
+<p>I'm of the opinion that you would try to avoid storing a whole map component (google map object), and have a controller view share it's state with the business model through busines-centric actions. This way you find yourself modelling your domain, not Googles. </p>
         </section>
 
         <aside id="sidebar">
