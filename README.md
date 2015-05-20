@@ -26,6 +26,8 @@ Thoughts on using Reflux as I try to come to terms with it.
      * Are mutated via parent 'ViewControllers' setting proprties or state.
 
 
+## Notes
+
 ### New Data
 
 New data can:
