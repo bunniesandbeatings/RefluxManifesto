@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Refluxmanifesto by bunniesandbeatings</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Refluxmanifesto</h1>
+        <h2>Thoughts on using Reflux as I try to come to terms with it</h2>
+        <a href="https://github.com/bunniesandbeatings/RefluxManifesto" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="reflux-manifesto" class="anchor" href="#reflux-manifesto" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reflux Manifesto</h1>
+
+<p>Thoughts on using Reflux as I try to come to terms with it.</p>
+
+<h2>
+<a id="actions" class="anchor" href="#actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Actions:</h2>
+
+<ul>
+<li>
+<a href="#new-data">New Data</a> <strong>always</strong> enters through actions</li>
+<li>Actions represent one half of the <a href="#public-api">Public API</a> of your business domain.</li>
+<li>Actions do no modelling, Stores do.</li>
+</ul>
+
+<h2>
+<a id="stores" class="anchor" href="#stores" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stores:</h2>
+
+<ul>
+<li>Where the business domain model belongs</li>
+<li>Can have direct method calls from other business modelling (other stores)</li>
+<li>Actions could read state from a store, BUT that sounds like we're mixing business logic in actions</li>
+<li>Stores can be dependent on <a href="https://github.com/spoike/refluxjs#joining-parallel-listeners-with-composed-listenables">multiple events occuring</a>
+
+<ul>
+<li>from actions</li>
+<li>from other stores</li>
+</ul>
+</li>
+<li>Shared modelling should be composed into helpers (other modeling functions in a seperate namespace)</li>
+</ul>
+
+<h2>
+<a id="components" class="anchor" href="#components" aria-hidden="true"><span class="octicon octicon-link"></span></a>Components:</h2>
+
+<ul>
+<li>Are dumb or smart</li>
+<li>Smart == ViewController
+
+<ul>
+<li>Map view events to Actions</li>
+<li>Call Actions during component lifecycle - e.g. componentWillMount</li>
+<li>Map Store Events to setState, causing invalidation</li>
+</ul>
+</li>
+<li>Dumb == Business Domain Free components, they talk about UI things, not business things
+
+<ul>
+<li>Know nothing of your Actions or stores</li>
+<li>Are mutated via parent 'ViewControllers' setting proprties or state.</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
+
+<h3>
+<a id="new-data" class="anchor" href="#new-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Data</h3>
+
+<p>New data can:</p>
+
+<ul>
+<li>Result from user actions</li>
+<li>Result from service results</li>
+<li>Result from domain changes (eg the hashchange event)</li>
+</ul>
+
+<p>Even without new data, if the view wants state to change (eg SomeThing.toggleSelected), do so through actions.</p>
+
+<h3>
+<a id="public-api" class="anchor" href="#public-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public API</h3>
+
+<p>Your business domain get's a clear public API comprised of:</p>
+
+<ul>
+<li>Actions: which are the only cause for state mutation.</li>
+<li>Store Events: which allow ViewControllers to respond to changes in state</li>
+<li>Store State: Which allows views to refresh based on state regardless of wether store events occured</li>
+</ul>
+
+<p>I'm not sure about reading state from the stores. It might be possible to avoid using it in views, and keep the interface very narrow indeed.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/bunniesandbeatings/RefluxManifesto/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/bunniesandbeatings/RefluxManifesto/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/bunniesandbeatings/RefluxManifesto"></a> is maintained by <a href="https://github.com/bunniesandbeatings">bunniesandbeatings</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
