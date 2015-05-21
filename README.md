@@ -4,9 +4,7 @@ Thoughts on using Reflux as I try to come to terms with it.
 ## Actions:
   * [New Data](#new-data) **always** enters through actions
   * Actions represent one half of the [Public API](#public-api) of your business domain.
-  * Actions do no modelling, Stores do.
-    * Don't read state from a store, that sounds like we're mixing business logic in actions.
-    * Don't respond to the payload from components, that's also business logic.
+  * [Actions do no modelling](#dont-model-in-actions), Stores do.
   * Do not listen to stores (although stores can trigger actions)
 
 ## Stores:
@@ -79,3 +77,9 @@ My concern is that this would introduce an action that:
 I want to use these, they seem valuable.
 
 [There is a discussion here](https://github.com/spoike/refluxjs/issues/158#issuecomment-67444098)
+
+
+## Don't model in actions
+Actions are the cause, stores are the effect.
+  * Don't read state from a store in an action, that sounds like we're mixing business logic in actions.
+  * Don't respond to the payload from components triggering the action, that's also business logic.
