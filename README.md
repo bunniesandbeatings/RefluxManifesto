@@ -9,9 +9,7 @@ Thoughts on using Reflux as I try to come to terms with it.
 
 ## Stores:
   * Where the business domain model belongs
-  * Can have direct method calls from other business modelling (other stores)
-  * Can contain [state](#state) that matters for business domain modelling
-    * Don't put everything in here. Just the stuff you need to persist for business decisions. 
+  * Can contain [state](#state)
   * Stores can be dependent on [multiple events occuring](https://github.com/spoike/refluxjs#joining-parallel-listeners-with-composed-listenables)
     * from actions
     * from other stores
@@ -59,6 +57,10 @@ From [An Issue](https://github.com/spoike/refluxjs/issues/252) where Spoike disc
 > As to how to reuse, I use mixins when applicable. If you think about them as traits, it makes it easy to attach functionality that you may want to reuse. If you need to add common methods to all stores you may add them to the `Reflux.StoreMixin` which is used during creation of stores.
 
 ## State
+
+It seems that the practice is to bring all your inital state and/or service state into stores, and then map reduce through stores to end up with calculated data representations your views can consume easily. 
+
+### Regarding the kind of data in stores
 
 Spoike suggests:
 > > As far as Flux goes is it okay to store the global var map = Object instance inside a store as a plain JS variable and then have a getter/setter action to get that map instance across multiple components in my app, including Maps component itself?
