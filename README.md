@@ -1,5 +1,12 @@
-# Reflux Manifesto
-Thoughts on using Reflux as I try to come to terms with it.
+# Reflux.js Manifesto
+
+Finding the idiomattic approach to using Reflux.js.
+
+Please, treat these as heuristics, because: 
+  0. I do not necessarily know what I'm talking about.
+  0. Idioms are not always the best way to break down a problem.
+
+* * *
 
 ## Actions:
   * [New Data](#new-data) **always** enters through actions
@@ -26,6 +33,8 @@ Thoughts on using Reflux as I try to come to terms with it.
    * Dumb == Business Domain Free components, they talk about UI things, not business things
      * Know nothing of your Actions or stores
      * Are mutated via parent 'ViewControllers' setting proprties or state.
+
+* * *
 
 # Notes
 
