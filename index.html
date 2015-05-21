@@ -31,13 +31,8 @@
 <li>
 <a href="#new-data">New Data</a> <strong>always</strong> enters through actions</li>
 <li>Actions represent one half of the <a href="#public-api">Public API</a> of your business domain.</li>
-<li>Actions do no modelling, Stores do.
-
-<ul>
-<li>Don't read state from a store, that sounds like we're mixing business logic in actions.</li>
-<li>Don't respond to the payload from components, that's also business logic.</li>
-</ul>
-</li>
+<li>
+<a href="#dont-model-in-actions">Actions do no modelling</a>, Stores do.</li>
 <li>Do not listen to stores (although stores can trigger actions)</li>
 </ul>
 
@@ -46,12 +41,7 @@
 
 <ul>
 <li>Where the business domain model belongs</li>
-<li>Can have direct method calls from other business modelling (other stores)</li>
-<li>Can contain <a href="#state">state</a> that matters for business domain modelling
-
-<ul>
-<li>Don't put everything in here. Just the stuff you need to persist for business decisions. </li>
-</ul>
+<li>Can contain <a href="#state">state</a>
 </li>
 <li>Stores can be dependent on <a href="https://github.com/spoike/refluxjs#joining-parallel-listeners-with-composed-listenables">multiple events occuring</a>
 
@@ -134,6 +124,11 @@
 <h2>
 <a id="state" class="anchor" href="#state" aria-hidden="true"><span class="octicon octicon-link"></span></a>State</h2>
 
+<p>It seems that the practice is to bring all your inital state and/or service state into stores, and then map reduce through stores to end up with calculated data representations your views can consume easily. </p>
+
+<h3>
+<a id="regarding-the-kind-of-data-in-stores" class="anchor" href="#regarding-the-kind-of-data-in-stores" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regarding the kind of data in stores</h3>
+
 <p>Spoike suggests:</p>
 
 <blockquote>
@@ -161,6 +156,16 @@
 <p>I want to use these, they seem valuable.</p>
 
 <p><a href="https://github.com/spoike/refluxjs/issues/158#issuecomment-67444098">There is a discussion here</a></p>
+
+<h2>
+<a id="dont-model-in-actions" class="anchor" href="#dont-model-in-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Don't model in actions</h2>
+
+<p>Actions are the cause, stores are the effect.</p>
+
+<ul>
+<li>Don't read state from a store in an action, that sounds like we're mixing business logic in actions.</li>
+<li>Don't respond to the payload from components triggering the action, that's also business logic.</li>
+</ul>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/bunniesandbeatings/RefluxManifesto">Refluxmanifesto</a> is maintained by <a href="https://github.com/bunniesandbeatings">bunniesandbeatings</a>.</span>
