@@ -9,6 +9,7 @@ Please, treat these as heuristics, because:
 Got feedback?
   * [Fork Me on github](https://github.com/bunniesandbeatings/RefluxManifesto/fork) and submit pull requests.
   * [Open an issue](https://github.com/bunniesandbeatings/RefluxManifesto/issues/new).
+
 * * *
 
 ## Actions:
