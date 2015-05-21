@@ -6,6 +6,9 @@ Please, treat these as heuristics, because:
   0. I do not necessarily know what I'm talking about.
   0. Idioms are not always the best way to break down a problem.
 
+Got feedback?
+  * [Fork Me on github](https://github.com/bunniesandbeatings/RefluxManifesto/fork) and submit pull requests.
+  * [Open an issue](https://github.com/bunniesandbeatings/RefluxManifesto/issues/new).
 * * *
 
 ## Actions:
